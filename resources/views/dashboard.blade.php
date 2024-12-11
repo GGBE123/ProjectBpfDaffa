@@ -1,7 +1,20 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
+@if(auth()->user()->is_admin == true)
+   <!-- Admin-specific content -->
+   <div class="admin-dashboard">
+       <h2>admin stuff</h2>
+       <p>Here you can manage users, view system stats, etc.</p>
+       <!-- Additional admin-specific sections -->
+   </div>
+@else
+   <!-- Default or Guest content if user is not logged in or role is not found -->
+   <div class="guest-dashboard">
+       <h2>user stuff</h2>
+       <p>Please log in to access your dashboard.</p>
+   </div>
+@endif
   <div class="row">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">

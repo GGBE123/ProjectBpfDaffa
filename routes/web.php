@@ -6,8 +6,22 @@ use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
-
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/products/manage', [ProductController::class, 'manageProducts'])->name('admin.products.manage');
+    Route::post('/admin/products/manage', [ProductController::class, 'manageProducts'])->name('admin.products.manage');
+    Route::get('/admin/products/add', [ProductController::class, 'create'])->name('admin.products.add');
+    Route::get('/admin/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
+    Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+    Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+    Route::post('/products/add', [ProductController::class, 'store'])->name('products.store');
+});
+
+
+Route::get('/store', [ProductController::class, 'storePage'])->name('store.index');
 
 // Landing Page - accessible to everyone
 Route::get('/', function () {
