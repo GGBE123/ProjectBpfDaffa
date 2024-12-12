@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product; // Assuming you have a Product model
 use App\Models\Category; // If products have categorie
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -22,26 +23,35 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all(); // Load categories if needed
-        return view('admin.products.add', compact('categories')); // Point to the Blade file
+        return view('products.add', compact('categories')); // Point to the Blade file
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'category_id' => 'nullable|exists:categories,id', // If using categories
-        ]);
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'category_id' => 'nullable|exists:categories,id',
+        'new_category' => 'nullable|string|max:255',
+    ]);
 
-        Product::create($validatedData);
-
-        return redirect()->route('dashboard')->with('success', 'Product added successfully!');
+    // Check if a new category is provided
+    if ($request->filled('new_category')) {
+        // Check if the category already exists
+        $category = Category::firstOrCreate(['name' => $request->input('new_category')]);
+        $validatedData['category_id'] = $category->id;
     }
+
+    Product::create($validatedData);
+
+    return redirect()->route('products.manage')->with('success', 'Product added successfully!');
+}
+
 
     public function storePage(Request $request)
 {
@@ -79,40 +89,25 @@ class ProductController extends Controller
     public function edit(Product $product)
 {
     $categories = Category::all();
-    return view('admin.products.edit', compact('product', 'categories'));
+    return view('products.edit', compact('product', 'categories'));
 }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Product $product)
+public function update(Request $request, $id)
 {
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'price' => 'required|numeric|min:0',
-        'stock' => 'required|integer|min:0',
-        'category_id' => 'nullable|exists:categories,id',
-    ]);
+    $product = Product::findOrFail($id);
+    $product->update($request->all());
 
-    $product->update($validatedData);
-
-    return redirect()->route('admin.products.manage')->with('success', 'Product updated successfully!');
+    return redirect()->route('products.manage')->with('success', 'Product updated successfully!');
 }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(product $product)
-    {
-        $product->delete();
-    return redirect()->route('admin.products.manage')->with('success', 'Product deleted successfully!');
-    }
+
 
     public function manageProducts()
 {
     $products = Product::with('category')->paginate(10); // Include categories for context
-    return view('admin.products.manage', compact('products'));
+    $categories = Category::all(); // Fetch categories
+    return view('products.manage', compact('products', 'categories'));
 }
+
 
 }

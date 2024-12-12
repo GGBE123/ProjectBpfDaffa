@@ -11,14 +11,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/products/manage', [ProductController::class, 'manageProducts'])->name('admin.products.manage');
-    Route::post('/admin/products/manage', [ProductController::class, 'manageProducts'])->name('admin.products.manage');
-    Route::get('/admin/products/add', [ProductController::class, 'create'])->name('admin.products.add');
-    Route::get('/admin/products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
-    Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
-    Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+    Route::get('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
+    Route::post('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
+    Route::get('/products/add', [ProductController::class, 'create'])->name('products.add');
+    Route::get('/admin/create-admin', [AdminController::class, 'createAdminForm'])->name('admin.create-admin');
+    Route::post('/admin/create-admin', [AdminController::class, 'storeAdmin'])->name('admin.store'); // Add this line
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::post('/products/add', [ProductController::class, 'store'])->name('products.store');
 });
+
 
 
 Route::get('/store', [ProductController::class, 'storePage'])->name('store.index');

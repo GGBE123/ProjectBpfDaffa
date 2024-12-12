@@ -1,4 +1,4 @@
-@extends('layouts.user_type.auth') <!-- Assuming 'app' is your base layout -->
+@extends(Auth::check() ? 'layouts.user_type.auth' : 'layouts.user_type.guest') <!-- Assuming 'app' is your base layout -->
 
 @section('content')
 <div class="container">

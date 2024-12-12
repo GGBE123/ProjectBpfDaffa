@@ -49,6 +49,7 @@
 <body class="g-sidenav-show  bg-gray-100 {{ (\Request::is('rtl') ? 'rtl' : (Request::is('virtual-reality') ? 'virtual-reality' : '')) }} ">
   @auth
     @yield('auth')
+    @yield('scripts')
   @endauth
   @guest
     @yield('guest')

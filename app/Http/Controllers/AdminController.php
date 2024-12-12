@@ -15,7 +15,7 @@ class AdminController extends Controller
 
     public function createAdminForm()
     {
-        return view('create-admin'); // Create a view for admin creation form
+        return view('admin.create-admin'); // Create a view for admin creation form
     }
 
     public function storeAdmin(Request $request)
