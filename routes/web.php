@@ -9,6 +9,29 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+
+// Checkout - User
+Route::middleware(['auth'])->group(function () {
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::get('/orders', [OrderController::class, 'userOrders'])->name('orders.index');
+});
+
+// Manage Orders - Admin
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/orders', [OrderController::class, 'manageOrders'])->name('admin.orders');
+    Route::post('/admin/orders/{order}/approve', [OrderController::class, 'approveOrder'])->name('orders.approve');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+});
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
@@ -27,9 +50,21 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('/store', [ProductController::class, 'storePage'])->name('store.index');
 
 // Landing Page - accessible to everyone
+// Home Page
 Route::get('/', function () {
-    return view('landing'); // Replace 'landing' with the actual name of your landing page view
-})->name('landing');
+    return view('landing');  // Adjust to your home page view
+})->name('home');
+
+// About Page
+Route::get('about', function () {
+    return view('about');  // Adjust to your About page view
+})->name('about');
+
+// Contact Page
+Route::get('contact', function () {
+    return view('contact');  // Adjust to your Contact page view
+})->name('contact');
+
 
 // Authenticated routes
 Route::group(['middleware' => 'auth'], function () {

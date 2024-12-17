@@ -2,6 +2,34 @@
 
 @section('content')
 <div class="container">
+    @guest
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ route('home') }}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('store.index') }}">Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('about') }}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+@endguest
+
     <h1>Store</h1>
 
     <!-- Search and Filter Form -->
@@ -36,7 +64,11 @@
                     <h5 class="card-title">{{ $product->name }}</h5>
                     <p class="card-text">{{ Str::limit($product->description, 100) }}</p>
                     <p class="card-text"><strong>Price:</strong> ${{ $product->price }}</p>
-                    {{-- <a href="{{ route('cart.add', $product->id) }}" class="btn btn-primary">Add to Cart</a> --}}
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+                    
                 </div>
             </div>
         </div>

@@ -1,5 +1,4 @@
 @extends(Auth::check() ? 'layouts.user_type.auth' : 'layouts.user_type.guest')
-<!-- Landing Page Section -->
 @section('content')
 @guest
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,16 +28,21 @@
         </div>
     </nav>
 @endguest
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>If you have any questions, feel free to reach out to us! We are here to help.</p>
 
-<!-- Main Content: Introduction Section -->
-<section class="intro-section text-center py-5">
-    <h1 class="display-4">Welcome to Our Store!</h1>
-    <p class="lead">Discover amazing products and services tailored just for you. Explore our platform and get to know
-        us better.</p>
-    <div>
-        <a href="{{ url('about') }}" class="btn btn-primary btn-lg">Learn More About Us</a>
-        <a href="{{ url('store') }}" class="btn btn-secondary btn-lg">Browse Our Store</a>
+        <h3>Our Office</h3>
+        <p>123 Main Street, Cityville, State 12345</p>
+
+        <h3>Contact Information</h3>
+        <p>
+            <strong>Email:</strong>
+            <a href="mailto:support@example.com">support@example.com</a>
+        </p>
+        <p>
+            <strong>Phone:</strong>
+            <a href="tel:+11234567890">(123) 456-7890</a>
+        </p>
     </div>
-</section>
-</div>
 @endsection

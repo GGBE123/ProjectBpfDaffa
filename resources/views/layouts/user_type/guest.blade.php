@@ -5,10 +5,13 @@
         @include('layouts.navbars.guest.nav')
         @yield('content') 
     @else
-        <div class="container position-sticky z-index-sticky top-0">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    @include('layouts.navbars.guest.nav')
+                    <!-- Use position-relative or just remove positioning classes -->
+                    <div class="navbar-container">
+                        {{-- @include('layouts.navbars.guest.nav') --}}
+                    </div>
                 </div>
             </div>
         </div>
