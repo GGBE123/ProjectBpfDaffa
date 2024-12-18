@@ -33,11 +33,11 @@
 <!-- Main Content: Introduction Section -->
 <section class="intro-section text-center py-5">
     <h1 class="display-4">Welcome to Our Store!</h1>
-    <p class="lead">Discover amazing products and services tailored just for you. Explore our platform and get to know
-        us better.</p>
+    <p class="lead">Check our catalog by visiting the store page !</p>
     <div>
-        <a href="{{ url('about') }}" class="btn btn-primary btn-lg">Learn More About Us</a>
-        <a href="{{ url('store') }}" class="btn btn-secondary btn-lg">Browse Our Store</a>
+        <a href="{{ url('store') }}" class="btn btn-primary btn-lg">Browse Our Store</a>
+        <a href="{{ url('about') }}" class="btn btn-secondary btn-lg">Learn More About Us</a>
+        <a href="{{ url('contact') }}" class="btn btn-primary btn-lg">Contact Us</a>
     </div>
 </section>
 </div>

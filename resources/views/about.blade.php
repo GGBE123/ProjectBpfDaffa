@@ -30,17 +30,16 @@
 @endguest
     <div class="container">
         <h1>About Us</h1>
-        <p>Welcome to our website! We are dedicated to providing the best service and products to our customers.</p>
+        <p>-</p>
 
         <h3>Our Mission</h3>
-        <p>Our mission is to enhance the customer experience by providing quality products, exceptional service, and a seamless shopping experience.</p>
+        <p>-</p>
 
         <h3>Our Values</h3>
         <ul>
-            <li>Customer Satisfaction</li>
-            <li>Innovation</li>
-            <li>Integrity</li>
-            <li>Reliability</li>
+            <li>-</li>
+            <li>-</li>
+            <li>-</li>
         </ul>
     </div>
 @endsection

@@ -33,7 +33,11 @@
         <p>If you have any questions, feel free to reach out to us! We are here to help.</p>
 
         <h3>Our Office</h3>
-        <p>123 Main Street, Cityville, State 12345</p>
+        <!-- Google Maps Embed -->
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=YOUR_GOOGLE_MAPS_EMBED_URL"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
 
         <h3>Contact Information</h3>
         <p>

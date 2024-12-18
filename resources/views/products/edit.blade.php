@@ -38,6 +38,15 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <label for="image" class="form-label">Product Image</label>
+            <input type="file" id="image" name="image" class="form-control">
+            @if($product->image)
+                <p>Current Image:</p>
+                <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" width="150">
+            @endif
+        </div>
+        
         <button type="submit" class="btn btn-primary">Update Product</button>
     </form>
 </div>

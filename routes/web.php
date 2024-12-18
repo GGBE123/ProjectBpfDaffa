@@ -18,12 +18,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrderController::class, 'userOrders'])->name('orders.index');
 });
 
-// Manage Orders - Admin
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/orders', [OrderController::class, 'manageOrders'])->name('admin.orders');
-    Route::post('/admin/orders/{order}/approve', [OrderController::class, 'approveOrder'])->name('orders.approve');
-});
-
 Route::middleware(['auth'])->group(function () {
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -31,7 +25,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 });
-
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
@@ -43,6 +36,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::post('/products/add', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/admin/orders', [OrderController::class, 'manageOrders'])->name('admin.orders');
+    Route::post('/admin/orders/{order}/approve', [OrderController::class, 'approveOrder'])->name('orders.approve');
+    Route::patch('/admin/orders/{order}/status/{status}', [OrderController::class, 'updateStatus'])->name('orders.update.status');
+    Route::get('admin/sales-report', [AdminController::class, 'salesReport'])->name('admin.sales-report');
+    Route::get('/admin/sales-report/export-csv', [AdminController::class, 'exportSalesReportCsv'])->name('admin.sales-report.exportCsv');
 });
 
 
@@ -72,29 +70,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
-    Route::get('/billing', function () {
-        return view('billing');
-    })->name('billing');
-
-    Route::get('/profile', function () {
-        return view('profile');    })->name('profile');
-
-    Route::get('/rtl', function () {
-        return view('rtl');
-    })->name('rtl');
-
-    Route::get('/user-management', function () {
-        return view('laravel-examples/user-management');
-    })->name('user-management');
-
-    Route::get('/tables', function () {
-        return view('tables');
-    })->name('tables');
-
-    Route::get('/virtual-reality', function () {
-        return view('virtual-reality');
-    })->name('virtual-reality');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
     Route::get('/user-profile', [InfoUserController::class, 'create']);

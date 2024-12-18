@@ -7,7 +7,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>#</th>
+                <th>Product ID</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -44,7 +44,7 @@
                             <h5 class="modal-title" id="editModalLabel{{ $product->id }}">Edit Product</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('products.update', $product->id) }}" method="POST">
+                        <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="modal-body">
@@ -74,6 +74,14 @@
                                         </option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image{{ $product->id }}" class="form-label">Product Image</label>
+                                    <input type="file" class="form-control" id="image{{ $product->id }}" name="image">
+                                    @if($product->image)
+                                        <p>Current Image:</p>
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
+                                    @endif
                                 </div>
                             </div>
                             <div class="modal-footer">
