@@ -17,7 +17,7 @@
             <button type="submit" class="btn btn-primary">Filter</button>
         </form>
 
-        <h4>Total Sales: ${{ number_format($totalSales, 2) }}</h4>
+        <h4>Total Sales: RP {{ $formattedTotalSales }},00</h4>
 
         <!-- Sales by Product -->
         <h5>Sales by Product</h5>
@@ -30,15 +30,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($salesByProduct as $item)
-                    <tr>
-                        <td>{{ $item->product->name }}</td>
-                        <td>{{ $item->total_quantity }}</td>
-                        <td>${{ number_format($item->total_revenue, 2) }}</td>
-                    </tr>
+                @foreach ($orders as $order)
+                    @foreach ($order->orderItems as $item)
+                        <tr>
+                            <td>{{ $item->product->name }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>RP {{ number_format($item->price * $item->quantity, 0, ',', '.') }},00</td>
+                        </tr>
+                    @endforeach
                 @endforeach
             </tbody>
         </table>
+
 
         <!-- Sales by Category -->
         <h5>Sales by Category</h5>
@@ -53,7 +56,7 @@
                 @foreach ($salesByCategory as $item)
                     <tr>
                         <td>{{ $item->category->name }}</td>
-                        <td>${{ number_format($item->total_revenue, 2) }}</td>
+                        <td>RP {{ number_format($item->total_revenue, 0, ',', '.') }},00</td>
                     </tr>
                 @endforeach
             </tbody>

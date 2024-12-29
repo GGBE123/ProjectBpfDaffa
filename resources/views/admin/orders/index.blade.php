@@ -2,26 +2,26 @@
 
 @section('content')
     <div class="container">
-        <h2>Manage Orders</h2>
+        <h1>Atur Orderan</h1>
         @foreach ($orders as $order)
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5>Order #{{ $order->id }} by {{ $order->user->name }} - Status: {{ ucfirst($order->status) }}</h5>
+                    <h5>Order #{{ $order->id }} by {{ $order->user->name }} - Status : {{ ucfirst($order->status) }}</h5>
                     <ul>
                         @foreach ($order->orderItems as $item)
                             <li>
-                                {{ $item->product->name }} - Quantity: {{ $item->quantity }} - Price: ${{ $item->price }}
+                                {{ $item->product->name }} - Banyak Produk : {{ $item->quantity }} - Harga : RP {{ number_format($item->price, 0, ',', '.') }},00
                             </li>
                         @endforeach
                     </ul>
-                    <p><strong>Total:</strong> ${{ $order->total_price }}</p>
+                    <p><strong>Harga Total : </strong> RP {{ number_format($order->total_price, 0, ',', '.') }},00</p>
 
                     <!-- Status actions -->
                     <div class="d-flex">
                         @if ($order->status === 'pending')
                             <form method="POST" action="{{ route('orders.approve', $order->id) }}" class="me-2">
                                 @csrf
-                                <button type="submit" class="btn btn-success">Approve Order</button>
+                                <button type="submit" class="btn btn-success">Terima Order</button>
                             </form>
                         @endif
 
@@ -31,7 +31,7 @@
                                 class="me-2">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-warning">Mark as Shipped</button>
+                                <button type="submit" class="btn btn-warning">Tandai Sebagai Dikirim</button>
                             </form>
                         @endif
 
@@ -40,7 +40,7 @@
                                 action="{{ route('orders.update.status', ['order' => $order->id, 'status' => 'completed']) }}">
                                 @csrf
                                 @method('PATCH')
-                                <button type="submit" class="btn btn-primary">Mark as Completed</button>
+                                <button type="submit" class="btn btn-primary">Tandai Sebagai Selesai</button>
                             </form>
                         @endif
                     </div>

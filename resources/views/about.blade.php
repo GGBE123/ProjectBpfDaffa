@@ -10,32 +10,32 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('store.index') }}">Store</a>
+                    <a class="nav-link" href="{{ route('store.index') }}">Toko</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">About Us</a>
+                    <a class="nav-link" href="{{ route('about') }}">Tentang kami</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                    <a class="nav-link" href="{{ route('contact') }}">Kontak</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Sign In</a>
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+                    <a class="nav-link" href="{{ route('register') }}">Buat akun</a>
                 </li>
             </ul>
         </div>
     </nav>
 @endguest
     <div class="container">
-        <h1>About Us</h1>
+        <h1>Tentang  Kami/h1>
         <p>-</p>
 
-        <h3>Our Mission</h3>
+        <h3>Misi Kami/h3>
         <p>-</p>
 
-        <h3>Our Values</h3>
+        <h3>Nilai Kami</h3>
         <ul>
             <li>-</li>
             <li>-</li>

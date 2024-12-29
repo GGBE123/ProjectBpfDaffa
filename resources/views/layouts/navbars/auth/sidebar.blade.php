@@ -25,7 +25,7 @@
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fas fa-store"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Store</span>
+                    <span class="nav-link-text ms-1">Toko</span>
                 </a>
             </li>
 
@@ -36,7 +36,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Cart</span>
+                        <span class="nav-link-text ms-1">Keranjang</span>
                     </a>
                 </li>
 
@@ -46,7 +46,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-box"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Orders</span>
+                        <span class="nav-link-text ms-1">Order</span>
                     </a>
                 </li>
             @endauth
@@ -62,7 +62,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-cogs"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Manage Products</span>
+                        <span class="nav-link-text ms-1">Atur Produk</span>
                     </a>
                 </li>
 
@@ -73,7 +73,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-box"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Manage Orders</span>
+                        <span class="nav-link-text ms-1">Atur Order</span>
                     </a>
                 </li>
 
@@ -84,7 +84,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-user-plus"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Make New Admin</span>
+                        <span class="nav-link-text ms-1">Buat Akun Admin</span>
                     </a>
                 </li>
 
@@ -95,7 +95,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Sales Report</span>
+                        <span class="nav-link-text ms-1">Laporan Penjualan</span>
                     </a>
                 </li>
             @endif

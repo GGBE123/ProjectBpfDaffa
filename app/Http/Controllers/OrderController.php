@@ -95,36 +95,36 @@ class OrderController extends Controller
         return redirect()->back()->with('success', "Order status updated to {$status}");
     }
 
-    public function salesReport(Request $request)
-    {
-        // Get the time period selected by the user (default to last 30 days)
-        $startDate = $request->start_date ?? Carbon::now()->subDays(30);
-        $endDate = $request->end_date ?? Carbon::now();
+    // public function salesReport(Request $request)
+    // {
+    //     // Get the time period selected by the user (default to last 30 days)
+    //     $startDate = $request->start_date ?? Carbon::now()->subDays(30);
+    //     $endDate = $request->end_date ?? Carbon::now();
 
-        // Query for total sales (sum of order totals)
-        $totalSales = Order::whereBetween('created_at', [$startDate, $endDate])
-                            ->sum('total_price');
+    //     // Query for total sales (sum of order totals)
+    //     $totalSales = Order::whereBetween('created_at', [$startDate, $endDate])
+    //                         ->sum('total_price');
 
-        // Query for sales by product
-        $salesByProduct = OrderItem::with('product')
-            ->whereHas('order', function($query) use ($startDate, $endDate) {
-                $query->whereBetween('orders.created_at', [$startDate, $endDate]);
-            })
-            ->selectRaw('product_id, sum(quantity) as total_quantity, sum(quantity * price) as total_revenue')
-            ->groupBy('product_id')
-            ->get();
+    //     // Query for sales by product
+    //     $salesByProduct = OrderItem::with('product')
+    //         ->whereHas('order', function($query) use ($startDate, $endDate) {
+    //             $query->whereBetween('orders.created_at', [$startDate, $endDate]);
+    //         })
+    //         ->selectRaw('product_id, sum(quantity) as total_quantity, sum(quantity * price) as total_revenue')
+    //         ->groupBy('product_id')
+    //         ->get();
 
-        // Sales by category (based on products)
-        $salesByCategory = Product::with('category')
-            ->whereHas('orderItems', function($query) use ($startDate, $endDate) {
-                $query->whereHas('order', function($q) use ($startDate, $endDate) {
-                    $q->whereBetween('orders.created_at', [$startDate, $endDate]);
-                });
-            })
-            ->selectRaw('category_id, sum(order_items.quantity * order_items.price) as total_revenue')
-            ->groupBy('category_id')
-            ->get();
+    //     // Sales by category (based on products)
+    //     $salesByCategory = Product::with('category')
+    //         ->whereHas('orderItems', function($query) use ($startDate, $endDate) {
+    //             $query->whereHas('order', function($q) use ($startDate, $endDate) {
+    //                 $q->whereBetween('orders.created_at', [$startDate, $endDate]);
+    //             });
+    //         })
+    //         ->selectRaw('category_id, sum(order_items.quantity * order_items.price) as total_revenue')
+    //         ->groupBy('category_id')
+    //         ->get();
 
-        return view('sales.report', compact('totalSales', 'salesByProduct', 'salesByCategory', 'startDate', 'endDate'));
-    }
+    //     return view('sales.report', compact('totalSales', 'salesByProduct', 'salesByCategory', 'startDate', 'endDate'));
+    // }
 }

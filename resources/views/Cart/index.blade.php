@@ -2,24 +2,24 @@
 
 @section('content')
 <div class="container">
-    <h1>Your Cart</h1>
+    <h1>Keranjang</h1>
 
     @if(session('cart') && count($cart) > 0)
     <table class="table">
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                <th>Produkt</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
                 <th>Subtotal</th>
-                <th>Actions</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach($cart as $item)
             <tr>
                 <td>{{ $item['name'] }}</td>
-                <td>${{ $item['price'] }}</td>
+                <td>RP {{ number_format($item['price'], 0, ',', '.') }},00</td>
                 <td>
                     <form action="{{ route('cart.update', $item['id']) }}" method="POST">
                         @csrf
@@ -27,12 +27,12 @@
                         <button type="submit" class="btn btn-sm btn-success">Update</button>
                     </form>
                 </td>
-                <td>${{ $item['subtotal'] }}</td>
+                <td>RP {{ number_format($item['subtotal'], 0, ',', '.') }},00</td>
                 <td>
                     <form action="{{ route('cart.remove', $item['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        <button type="submit" class="btn btn-sm btn-danger">Keluarkan</button>
                     </form>
                 </td>
             </tr>
@@ -41,14 +41,14 @@
     </table>
 
     <div class="text-end">
-        <h4>Total: ${{ $total }}</h4>
+        <h4>Total : RP {{ number_format($total, 0, ',', '.') }},00</h4>
         <form action="{{ route('cart.checkout') }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-success">Checkout</button>
         </form>
     </div>
     @else
-    <p>Your cart is empty.</p>
+    <p>Keranjang Kosong!</p>
     @endif
 </div>
 @endsection

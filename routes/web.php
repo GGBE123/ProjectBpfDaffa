@@ -18,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders', [OrderController::class, 'userOrders'])->name('orders.index');
 });
 
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -26,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 });
 
+// Admin Routes
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');
     Route::post('/products/manage', [ProductController::class, 'manageProducts'])->name('products.manage');

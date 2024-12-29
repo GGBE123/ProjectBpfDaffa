@@ -11,19 +11,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('store.index') }}">Store</a>
+                    <a class="nav-link" href="{{ route('store.index') }}">Toko</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">About Us</a>
+                    <a class="nav-link" href="{{ route('about') }}">Tentang kami</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                    <a class="nav-link" href="{{ route('contact') }}">Kontak</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Sign In</a>
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+                    <a class="nav-link" href="{{ route('register') }}">Buat akun</a>
                 </li>
             </ul>
         </div>
@@ -32,12 +32,12 @@
 
 <!-- Main Content: Introduction Section -->
 <section class="intro-section text-center py-5">
-    <h1 class="display-4">Welcome to Our Store!</h1>
-    <p class="lead">Check our catalog by visiting the store page !</p>
+    <h1 class="display-4">Selamat datang di toko kami!</h1>
+    <p class="lead">Lihat katalog produk kami dengan mengunjungi halaman toko kami!</p>
     <div>
-        <a href="{{ url('store') }}" class="btn btn-primary btn-lg">Browse Our Store</a>
-        <a href="{{ url('about') }}" class="btn btn-secondary btn-lg">Learn More About Us</a>
-        <a href="{{ url('contact') }}" class="btn btn-primary btn-lg">Contact Us</a>
+        <a href="{{ url('store') }}" class="btn btn-primary btn-lg">Halaman Toko</a>
+        <a href="{{ url('about') }}" class="btn btn-secondary btn-lg">Tentang Kami</a>
+        <a href="{{ url('contact') }}" class="btn btn-primary btn-lg">Kontak Kami</a>
     </div>
 </section>
 </div>

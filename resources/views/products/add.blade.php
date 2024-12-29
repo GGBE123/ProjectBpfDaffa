@@ -2,21 +2,21 @@
 
 @section('content')
 <div class="container">
-    <h1>Add Product</h1>
+    <h1>Tambah Produk</h1>
     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="name" class="form-label">Product Name</label>
+            <label for="name" class="form-label">Nama Produk</label>
             <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
+            <label for="description" class="form-label">Deskripsi</label>
             <textarea id="description" name="description" class="form-control">{{ old('description') }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
+            <label for="price" class="form-label">Harga</label>
             <input type="number" id="price" name="price" class="form-control" value="{{ old('price') }}" required>
         </div>
 
@@ -26,7 +26,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
+            <label for="category" class="form-label">Katagori</label>
             <select id="category" name="category_id" class="form-select">
                 <option value="">Select Category</option>
                 @foreach($categories as $category)
@@ -36,16 +36,16 @@
         </div>
 
         <div class="mb-3">
-            <label for="newCategory" class="form-label">New Category</label>
+            <label for="newCategory" class="form-label">Katagori Baru</label>
             <input type="text" id="newCategory" name="new_category" class="form-control">
         </div>
 
         <div class="mb-3">
-            <label for="image" class="form-label">Product Image</label>
+            <label for="image" class="form-label">Gambar Produk</label>
             <input type="file" id="image" name="image" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Product</button>
+        <button type="submit" class="btn btn-primary">Tambahkan Produk</button>
     </form>
 </div>
 @endsection

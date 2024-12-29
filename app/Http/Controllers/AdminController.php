@@ -106,13 +106,19 @@ class AdminController extends Controller
             $query->whereBetween('created_at', [$request->start_date, $request->end_date]);
         }
 
-        // Fetch total sales and total orders
+        // Fetch raw totals for calculations
         $totalSales = $query->sum('price');
         $totalOrders = $query->count();
 
-        // Fetch order items data for the breakdown table (or you can fetch orders if needed)
-        $orders = Order::with('orderItems.product')->get(); // Adjust the relationship if necessary
+        // Fetch orders and their items
+        $orders = Order::with('orderItems.product')->get();
 
-        return view('admin.sales-report', compact('totalSales', 'totalOrders', 'orders'));
+        // Fetch sales by category if applicable
+        $salesByCategory = []; // Populate based on your logic, e.g., categories relationship
+
+        // Format the total sales as RP (price),00
+        $formattedTotalSales = number_format($totalSales, 0, ',', '.');
+
+        return view('admin.sales-report', compact('totalSales', 'formattedTotalSales', 'totalOrders', 'orders', 'salesByCategory'));
     }
 }
