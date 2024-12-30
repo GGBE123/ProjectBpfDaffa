@@ -62,20 +62,24 @@
             @foreach ($products as $product)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top"
-                            alt="{{ $product->name }}">
+                        <a href="{{ route('products.show', $product->id) }}">
+                            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top"
+                                alt="{{ $product->name }}">
+                        </a>
                         <div class="card-body">
-                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <h5 class="card-title">
+                                <a href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
+                            </h5>
                             <p class="card-text">{{ Str::limit($product->description, 100) }}</p>
                             <p class="card-text"><strong>Harga :</strong> RP
                                 {{ number_format($product->price, 0, ',', '.') }},00</p>
                             <form action="{{ route('cart.add', $product->id) }}" method="POST">
-
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Tambah ke keranjang</button>
                             </form>
                         </div>
                     </div>
+
                 </div>
             @endforeach
         </div>

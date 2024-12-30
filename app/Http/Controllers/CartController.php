@@ -66,44 +66,59 @@ class CartController extends Controller
     }
 
     // Checkout logic
-    public function checkout(Request $request)
-{
-    // Retrieve cart from session
-    $cart = session()->get('cart', []);
+    // Checkout logic
+    public function checkout()
+    {
+        // Retrieve cart from session
+        $cart = session()->get('cart', []);
 
-    // If cart is empty, redirect back with an error
-    if (empty($cart)) {
-        return redirect()->route('store.index')->with('error', 'Your cart is empty.');
-    }
+        // If cart is empty, redirect back with an error
+        if (empty($cart)) {
+            return redirect()->route('store.index')->with('error', 'Your cart is empty.');
+        }
 
-    // Calculate the total price
-    $totalPrice = 0;
-    foreach ($cart as $item) {
-        $totalPrice += $item['price'] * $item['quantity'];
-    }
+        // Calculate the total price
+        $totalPrice = array_sum(array_column($cart, 'subtotal'));
 
-    // Create the order
-    $order = Order::create([
-        'user_id' => auth()->id(),
-        'total_price' => $totalPrice,
-        'status' => 'pending',
-    ]);
-
-    // Create the order items
-    foreach ($cart as $item) {
-        OrderItem::create([
-            'order_id' => $order->id,
-            'product_id' => $item['id'],
-            'quantity' => $item['quantity'],
-            'price' => $item['price'],
+        // Create the order
+        $order = Order::create([
+            'user_id' => auth()->id(),
+            'total_price' => $totalPrice,
+            'status' => 'pending',
         ]);
+
+        // Create the order items
+        foreach ($cart as $item) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $item['id'],
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
+            ]);
+        }
+
+        // Clear the cart
+        session()->forget('cart');
+
+        // Pass checkout data to the session for use in the bank transfer view
+        session()->put('checkoutData', [
+            'order_id' => $order->id,
+            'items' => $cart,
+            'total' => $totalPrice,
+        ]);
+
+        // Redirect to the bank transfer page
+        return redirect()->route('cart.bank_transfer');
     }
 
-    // Clear the cart
-    session()->forget('cart');
+    public function bankTransfer()
+    {
+        $checkoutData = session('checkoutData');
 
-    // Redirect to a confirmation page or the store index with a success message
-    return redirect()->route('store.index')->with('success', 'Order placed successfully!');
-}
+        if (!$checkoutData) {
+            return redirect()->route('store.index')->with('error', 'No order data found.');
+        }
 
+        return view('Cart.bank_transfer', compact('checkoutData'));
+    }
 }

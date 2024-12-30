@@ -1,17 +1,105 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-@if(auth()->user()->is_admin == true)
-   <!-- Admin-specific content -->
-   <div class="admin-dashboard">
-       <h1>Admin stuff</h1>
-   </div>
-@else
-   <div class="guest-dashboard">
-       <h1>User stuff</h1>
-   </div>
-@endif
-  
+<div class="container-fluid py-4">
+    @if(auth()->user()->is_admin)
+        <!-- Admin-specific content -->
+        <div class="admin-dashboard">
+            <h1>Selamat datang ke Dashboard, Admin {{ auth()->user()->name }}</h1>
+            <p>Email : {{ auth()->user()->email }}</p>
+            <div class="row mt-4">
+                <!-- Total Users -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h6>Total Akun User</h6>
+                        </div>
+                        <div class="card-body">
+                            <p>{{ $totalUsers }} Akun</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Total Orders -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <h6>Total Order</h6>
+                        </div>
+                        <div class="card-body">
+                            <p>{{ $totalOrders }} Order</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabel Status Order -->
+            <div class="card mt-4">
+                <div class="card-header pb-0">
+                    <h6>Status Semua Order</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($adminOrders as $order)
+                                <tr>
+                                    <td>{{ ucfirst($order->status) }}</td>
+                                    <td>{{ $order->count }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="2">Belum ada data order.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    @else
+        <!-- User-specific content -->
+        <div class="user-dashboard">
+            <h1>Selamat datang, {{ auth()->user()->name }}</h1>
+            <p>Email : {{ auth()->user()->email }}</p>
+
+            <!-- Tabel Status Order -->
+            <div class="card mt-4">
+                <div class="card-header pb-0">
+                    <h6>Status Order Anda</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pending</td>
+                                <td>{{ $userOrders['pending'] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Dikirim</td>
+                                <td>{{ $userOrders['shipped'] }}</td>
+                            </tr>
+                            <tr>
+                                <td>Selesai</td>
+                                <td>{{ $userOrders['completed'] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    @endif
+</div>
 @endsection
 @push('dashboard')
   <script>

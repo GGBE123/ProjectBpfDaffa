@@ -28,18 +28,19 @@
         </div>
     </nav>
 @endguest
-    <div class="container">
-        <h1>Tentang  Kami/h1>
-        <p>-</p>
+<div class="container">
+    <h1>Tentang Kami</h1>
+    <p>Kami adalah perusahaan yang berfokus pada penjualan alat ternak ayam untuk peternak ayam broiler di daerah Riau. Dengan tujuan untuk membantu peternak meningkatkan produktivitas dan efisiensi, kami menyediakan berbagai produk berkualitas tinggi yang dirancang khusus untuk memenuhi kebutuhan industri peternakan ayam broiler.</p>
 
-        <h3>Misi Kami/h3>
-        <p>-</p>
+    <h3>Misi Kami</h3>
+    <p>Misi kami adalah untuk mendukung peternak ayam broiler di Riau dengan menyediakan alat ternak terbaik yang dapat meningkatkan kesejahteraan hewan dan hasil produksi. Kami berkomitmen untuk memberikan solusi inovatif yang dapat membantu peternak mencapai keberhasilan dalam usaha mereka.</p>
 
-        <h3>Nilai Kami</h3>
-        <ul>
-            <li>-</li>
-            <li>-</li>
-            <li>-</li>
-        </ul>
-    </div>
+    <h3>Nilai Kami</h3>
+    <ul>
+        <li>Integritas : Kami menjunjung tinggi kejujuran dan transparansi dalam setiap tindakan kami.</li>
+        <li>Inovasi : Kami selalu mencari cara baru untuk meningkatkan produk dan layanan kami untuk mendukung peternak.</li>
+        <li>Keberlanjutan : +Kami berkomitmen untuk melindungi lingkungan dan mendukung praktik peternakan yang berkelanjutan.</li>
+    </ul>
+</div>
+
 @endsection

@@ -48,7 +48,9 @@
         </form>
     </div>
     @else
-    <p>Keranjang Kosong!</p>
+    <div class="alert alert-info">
+        <strong>Keranjang anda Kosong.</strong>
+    </div>
     @endif
 </div>
 @endsection

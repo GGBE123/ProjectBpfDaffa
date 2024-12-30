@@ -45,7 +45,7 @@
         </p>
         <p>
             <strong>Handphone :</strong>
-            <a href="tel:+6282172641576">(+62)821-7264-1576</a>
+            <a href="tel:+6282172641576">(+62) 821-7264-1576</a>
         </p>
     </div>
 @endsection

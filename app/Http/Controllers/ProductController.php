@@ -86,10 +86,12 @@ class ProductController extends Controller
         return view('store.index', compact('products', 'categories'));
     }
 
-    public function show(product $product)
+    public function show($id)
     {
-        //
+        $product = Product::with('category')->findOrFail($id); // Cari produk berdasarkan ID
+        return view('products.show', compact('product'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

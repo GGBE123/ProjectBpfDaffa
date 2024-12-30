@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ChangePasswordController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DashboardController;
 
 // Checkout - User
 Route::middleware(['auth'])->group(function () {
@@ -45,9 +45,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/sales-report/export-csv', [AdminController::class, 'exportSalesReportCsv'])->name('admin.sales-report.exportCsv');
 });
 
-
+Route::get('/cart/bank-transfer', [CartController::class, 'bankTransfer'])->name('cart.bank_transfer');
 
 Route::get('/store', [ProductController::class, 'storePage'])->name('store.index');
+
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
 
 // Landing Page - accessible to everyone
 // Home Page
@@ -69,9 +72,7 @@ Route::get('contact', function () {
 // Authenticated routes
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
     Route::get('/user-profile', [InfoUserController::class, 'create']);
